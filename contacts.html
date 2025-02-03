@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+</html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Contacts</title> 
+  <link rel="stylesheet" href="css/contacts.css" />
+  <script type="text/javascript" src="js/code.js" defer></script>
+  <script type="text/javascript" src="js/md5.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	
+	
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () 
+		{
+			readCookie();
+			loadContacts();
+		}, false);
+	</script> 
+</head>
+
+<body>
+	<div class="navBar">
+		<a href="index.html">
+			<img id="logo" src="images/icon.png" alt="logo image not found">
+		</a>
+		<nav>
+			<ul class="navlinks">
+			<li><a href="#putalocationhere">Contact</a></li>
+			<li><a href="#putalocationhere">Other</a></li>
+			<li><a onclick=doLogout()>Logout</a></li>
+			<span id="userName"> <span>
+			</ul>
+		</nav>
+	</div>
+	
+	<div class="contentSpace">
+		<div class="interface">
+			<div class="interfaceUI">
+				<div class="searchBar">
+					<input onkeyup=loadContacts() type="text" name="search" id="searchText" placeholder="Search..."
+						class="searchInput">
+					<a href="#" class="searchButton" type="button" id="searchContactButton" class="buttons font"
+						onclick="searchContacts();"><i class="material-icons">search</i></a>
+				</div>
+				
+				<div class="buttoon">
+					<button id="add" type="button" onclick=toggleTable()> <i id="adtable" class="material-icons">add</i></button>
+					<button id="toggle" type="button" onclick=beginEdit()> <i id="swicon" class="material-icons">app_registration</i></button>
+					<button id="delete" type="button" onclick=beginDelete()> <i class="material-icons">delete</i></button>
+				</div>
+			</div>		
+		</div>
+		
+		<div class="tables">
+			<div class="tblContent" id="contactsTable">
+				<table id="contacts" cellpadding="0" cellspacing="0" border="0">
+					<thread>
+						<tr>
+							<th>First&nbspName</th>
+							<th>Last&nbspName</th>
+							<th>Email</th>
+							<th>Phone</th>
+						</tr>
+					</thread>
+					<tbody id="tbody"></tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="newContact">
+			<form id="addContact" action="" method="post" style="display: none;">
+				<input type="text" id="contactTextFirst" placeholder="First Name" required>
+				<input type="text" id="contactTextLast" placeholder="Last Name" required>
+				<input type="text" id="contactTextNumber" placeholder="XXX-XXX-XXXX" required
+					pattern="^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$">
+				<input type="text" id="contactTextEmail" placeholder="name@email.com"
+					pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required>
+				<button type="button" id="addContactButton" onclick="addContact()"> New Contact
+				</button>
+			</form>
+
+		</div>	
+	</div>
+</body>
+</html>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 
+	 

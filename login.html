@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+</html>
+<head>
+  <meta charset="UTF-8">
+  <title>LCM Login</title> 
+  <link rel="stylesheet" href="css/login.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="js/code.js"></script>
+  <script type="text/javascript" src="js/md5.js"></script>
+</head>
+
+<body>
+
+	<div class="navBar">
+		<a href="index.html">
+			<img id="logo" src="images/icon.png" alt="logo image not found">
+		</a>
+		
+		<nav>
+			<ul class="navlinks">
+			<li><a href="login.html">Login</a></li>
+			<li><a onclick=funny() href="login.html">Signup</a></li>
+			<li><a href="#putalocationhere">Contact</a></li>
+			<li><a href="#putalocationhere">Other</a></li>
+			</ul>
+		</nav>
+	</div>
+  	
+	<div class = "loginSpace">
+		<div class= "formUI">
+			<div class="toggleButtonBox">
+				<div id="btn" ></div>
+					<button type="button" class="toggle-btn" onclick="toggleLogin()" id="loginSlider">Login</button>
+					<button type="button" class="toggle-btn" onclick="toggleSignup()">Signup</button>
+			</div>
+			<form id="login" class="formy">
+				<input type="text" class="inputField " id="loginNameInput" placeholder="username" name="username" required
+				pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,20}$" />
+				<input type="password" class="inputField " id="loginPasswordInput" placeholder="password" name="password" required
+				pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,20}" />
+				<button type="button" id="loginButton" class="submitButton" onclick="doLogin()">Login</button>
+			</form>
+			<form id="signup" class="formy">
+				<input type="text" class="inputField " id="firstName" placeholder="first&nbsp;name" name="firstName" required />
+				<input type="text" class="inputField " id="lastName" placeholder="last&nbsp;name" name="lastName" required />
+				<input type="text" class="inputField " id="username" placeholder="username" name="login" required
+					pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,20}" />
+				<input type="password" class="inputField " id="password" placeholder="password" name="password" required
+					pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*]).{8,25}" />
+				<button type="button" id="signupButton" class="submitButton" onclick="doSignup()">Signup</button><br />
+			</form>
+		</div>
+	   <div id="passwordRequirements">
+			<h3>Password must contain: </h3>
+				<p id="passwordLength" class="invalid"> 8 to 25 characters</p>		
+				<p id="passwordNumber" class="invalid"> At least one number</p>
+				<p id="passwordCharac" class="invalid"> At least one special character </p>
+        </div>
+        <div id="passUsernameRequirements">
+            <h3>Username must contain: </h3>
+				<p id="userLett" class="invalid"> At least one letter </p>
+				<p id="userLen" class="invalid">3 to 20 characters</p>
+			<h3> Username may contain: </h3> 
+				<p>Numbers</p>
+				<p>Underscores</p>
+				<p>Hyphens</p>
+        </div> 
+		<div id="passFullname">
+            <h3>Your name may not include: </h3>
+			<p id="nameNumbers" class = "valid"> Any Numbers </p>
+			<p id="nameSymbols" class = "valid"> Any Symbols other than a hyphen </p>
+		</div> 
+	</div>
+	<div class = "BottomSpace" > </div>
+</body>
+		
+
+
+<script>
+	if(window.innerWidth > 1000)
+	{
+		let fNameInput = document.getElementById("firstName");
+		let lNameInput = document.getElementById("lastName");
+		let nameChack = document.getElementById("nameNumbers");
+		let nameCheck = document.getElementById("nameSymbols");
+		let userform = document.getElementById("username");
+		let totalform = document.getElementById("formUI");
+		let lettInput = document.getElementById("userLett");
+		let lenInput = document.getElementById("userLen");
+	  
+
+		userform.onfocus = function ()
+		{
+			document.getElementById("passwordRequirements").style.display = "none";
+			document.getElementById("passFullname").style.display = "none";
+			document.getElementById("passUsernameRequirements").style.display = "block";
+		} 
+	  
+		fNameInput.onfocus = function ()
+		{
+			document.getElementById("passwordRequirements").style.display = "none";
+			document.getElementById("passUsernameRequirements").style.display = "none";
+			document.getElementById("passFullname").style.display = "block";
+		}
+	  
+		lNameInput.onfocus = function ()
+		{
+			document.getElementById("passwordRequirements").style.display = "none";
+			document.getElementById("passUsernameRequirements").style.display = "none";
+			document.getElementById("passFullname").style.display = "block";
+		}
+	  
+		fNameInput.onkeyup = function () 
+		{
+			var nums = /[0-9]/g;
+			var lett = /[a-zA-Z]/g;
+			var spec = /[!@#$%^&*\/\_]/g;
+		
+			if (fNameInput.value.match(nums) || lNameInput.value.match(nums)) 
+			{
+				nameChack.classList.remove("valid");
+				nameChack.classList.add("invalid");
+			}
+
+			else 
+			{
+				nameChack.classList.remove("invalid");
+				nameChack.classList.add("valid");
+			}
+		
+		
+			if (fNameInput.value.match(spec) || lNameInput.value.match(spec))
+			{
+				nameCheck.classList.remove("valid");
+				nameCheck.classList.add("invalid");
+          
+			}
+
+			else
+			{
+				nameCheck.classList.remove("invalid");
+				nameCheck.classList.add("valid");
+			} 
+		}
+	   
+		lNameInput.onkeyup = function () 
+		{
+			var nums = /[0-9]/g;
+			var lett = /[a-zA-Z]/g;
+			var spec = /[!@#$%^&*\/\_]/g;
+		
+			if (lNameInput.value.match(nums) || fNameInput.value.match(nums)) 
+			{
+				nameChack.classList.remove("valid");
+				nameChack.classList.add("invalid");
+			}
+
+			else 
+			{
+				nameChack.classList.remove("invalid");
+				nameChack.classList.add("valid");
+			}
+		
+			if (lNameInput.value.match(spec) || fNameInput.value.match(spec))
+			{
+				nameCheck.classList.remove("valid");
+				nameCheck.classList.add("invalid");
+          
+			}
+			else 
+			{
+				nameCheck.classList.remove("invalid");
+				nameCheck.classList.add("valid");
+			} 
+		}
+		
+		userform.onkeyup = function () 
+		{
+			var nums = /[0-9]/g;
+			var lett = /[a-zA-Z]/g;
+			var hyp = /[-]/g;
+			var und = /[_]/g;
+		
+			if ((userform.value.length >= 3 && userform.value.length <= 18)) 
+			{
+				lenInput.classList.remove("invalid");
+				lenInput.classList.add("valid");
+			}
+
+			else 
+			{
+				lenInput.classList.remove("valid");
+				lenInput.classList.add("invalid");
+			}
+
+			if ((userform.value.match(lett))) 
+			{
+				lettInput.classList.remove("invalid");
+				lettInput.classList.add("valid");
+			}
+			else
+			{
+				lettInput.classList.remove("valid");
+				lettInput.classList.add("invalid");
+			}
+		}	 
+	}
+</script> 
+<script>
+	if(window.innerWidth > 1000)
+	{
+		let passwordField = document.getElementById("password");
+		let passNumCheck = document.getElementById("passwordNumber");
+		let passSpecCheck = document.getElementById("passwordCharac");
+		let passLenCheck = document.getElementById("passwordLength");
+
+		passwordField.onfocus = function () 
+		{
+			document.getElementById("passwordRequirements").style.display = "block";
+			document.getElementById("passFullname").style.display = "none";
+			document.getElementById("passUsernameRequirements").style.display = "none";
+		}
+
+		passwordField.onkeyup = function () 
+		{
+			var nums = /[0-9]/g;
+			var lett = /[a-zA-Z]/g;
+			var spec = /[!@#$%^&*]/g;
+
+			//check length
+			if (passwordField.value.length >= 8 && passwordField.value.length <= 32) 
+			{
+				passLenCheck.classList.remove("invalid");
+				passLenCheck.classList.add("valid");
+			}
+			else 
+			{
+				passLenCheck.classList.remove("valid");
+				passLenCheck.classList.add("invalid");
+			}
+
+			//check numbers
+			if (passwordField.value.match(nums)) 
+			{
+				passNumCheck.classList.remove("invalid");
+				passNumCheck.classList.add("valid");
+			}
+			else 
+			{
+				passNumCheck.classList.remove("valid");
+				passNumCheck.classList.add("invalid");
+			}
+
+			//check special characters
+			if (passwordField.value.match(spec)) 
+			{
+				passSpecCheck.classList.remove("invalid");
+				passSpecCheck.classList.add("valid");
+			}
+			else 
+			{
+				passSpecCheck.classList.remove("valid");
+				passSpecCheck.classList.add("invalid");
+			} 
+		}
+	}
+</script> 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 
+	 
